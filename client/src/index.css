@@ -1,0 +1,165 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary: #6c63ff;
+  --primary-dark: #5a52e0;
+  --primary-light: rgba(108,99,255,0.1);
+  --income: #43e0a4;
+  --income-bg: rgba(67,224,164,0.1);
+  --expense: #ff6584;
+  --expense-bg: rgba(255,101,132,0.1);
+  --warning: #ffa94d;
+  --warning-bg: rgba(255,169,77,0.1);
+  --info: #38bdf8;
+
+  --bg: #f0f0f8;
+  --surface: #ffffff;
+  --surface2: #f7f7fc;
+  --border: rgba(108,99,255,0.12);
+  --border2: rgba(0,0,0,0.06);
+
+  --text: #1a1a2e;
+  --text2: #4a4a6a;
+  --text3: #8888aa;
+
+  --shadow: 0 2px 12px rgba(108,99,255,0.08);
+  --shadow-md: 0 4px 24px rgba(108,99,255,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+
+  --font: 'DM Sans', system-ui, sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: var(--font); cursor: pointer; border: none; outline: none; }
+input, select, textarea { font-family: var(--font); outline: none; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* Utility classes */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 500; transition: all 0.15s;
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text2); }
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+.btn-danger { background: var(--expense-bg); color: var(--expense); }
+.btn-danger:hover { background: var(--expense); color: #fff; }
+
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500;
+}
+.badge-income { background: var(--income-bg); color: #0d9068; }
+.badge-expense { background: var(--expense-bg); color: #c0304e; }
+.badge-pending { background: var(--warning-bg); color: #c07000; }
+.badge-success { background: var(--income-bg); color: #0d9068; }
+
+.input {
+  width: 100%; padding: 10px 14px;
+  border: 1px solid var(--border2); border-radius: var(--radius-sm);
+  background: var(--surface2); color: var(--text); font-size: 14px;
+  transition: border-color 0.15s;
+}
+.input:focus { border-color: var(--primary); background: var(--surface); }
+
+.select {
+  width: 100%; padding: 10px 14px;
+  border: 1px solid var(--border2); border-radius: var(--radius-sm);
+  background: var(--surface2); color: var(--text); font-size: 14px;
+  cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238888aa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+}
+.select:focus { border-color: var(--primary); }
+
+label { font-size: 13px; font-weight: 500; color: var(--text2); display: block; margin-bottom: 5px; }
+
+.form-group { margin-bottom: 14px; }
+
+/* Page fade-in */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fadeUp 0.25s ease; }
+
+/* Loading spinner */
+.spinner {
+  width: 36px; height: 36px; border: 3px solid var(--border);
+  border-top-color: var(--primary); border-radius: 50%; animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Empty state */
+.empty { text-align: center; padding: 48px 24px; color: var(--text3); }
+.empty .empty-icon { font-size: 48px; margin-bottom: 12px; }
+.empty p { font-size: 14px; }
+
+/* Modal overlay */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(26,26,46,0.5);
+  backdrop-filter: blur(4px); display: flex; align-items: center;
+  justify-content: center; z-index: 1000; padding: 16px;
+}
+.modal {
+  background: var(--surface); border-radius: 16px; padding: 28px;
+  width: 100%; max-width: 480px; box-shadow: var(--shadow-md);
+  max-height: 90vh; overflow-y: auto;
+  animation: fadeUp 0.2s ease;
+}
+.modal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 20px;
+}
+.modal-title { font-size: 18px; font-weight: 600; }
+.modal-close {
+  width: 30px; height: 30px; border-radius: 50%; background: var(--surface2);
+  border: 1px solid var(--border); display: flex; align-items: center;
+  justify-content: center; font-size: 16px; cursor: pointer; color: var(--text3);
+}
+.modal-close:hover { background: var(--expense-bg); color: var(--expense); }
+
+/* Amount display */
+.amount-display { font-family: var(--mono); font-weight: 500; }
+.amount-income { color: #0d9068; }
+.amount-expense { color: #c0304e; }
+
+/* Progress bar */
+.progress-bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width 0.5s ease; }
+
+/* Section label */
+.section-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); margin-bottom: 10px; }
+
+/* Responsive layout helpers */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+@media (max-width: 1024px) {
+  .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+}
